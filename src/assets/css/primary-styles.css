@@ -1,5 +1,12 @@
 html {
   height: 100%;
+  overflow-x: hidden;
+}
+body {
+  margin: 0px;
+  min-height: 100%;
+  width: 100%;
+  z-index: -10;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -7,12 +14,6 @@ html {
   background-repeat:no-repeat;
   background: linear-gradient(45deg, #27aae1, #2e3192);
   background-attachment: fixed;
-  overflow-x: hidden;
-}
-body {
-  margin: 0px;
-  min-height: 100%;
-  width: 100%;
   overflow-x: hidden;
 }
 
