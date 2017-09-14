@@ -1,20 +1,16 @@
-<div class="header m-l-r-30">
+<div class="header">
     <!--<div class="logo">-->
       <!--<h3>cedaus.</h3>-->
     <!--</div>-->
-  </div>
-<div class="m-t-20 m-l-r-150">
-  <div class="intro m-t-100">
-    <h4 class="intro-heading">Hi, welcome to my space.</h4>
+</div>
+<div class="content">
+  <div class="intro">
+    <h4 class="heading">Hi, welcome to my space.</h4>
     <p class="paragraph">This is the collection of relevant work from my desk.</p>
   </div>
   <div class="m-t-30">
     <ul class="unordered-list-2 clearfix">
-      <li class="list-item-3"><a href="http://needwant.com" target="_blank">Blackbox of Product Management</a></li>
-      <li class="list-item-3"><a href="http://needwant.com" target="_blank">Guirlilla Testing for EdTech Startup</a></li>
-      <li class="list-item-3"><a href="http://needwant.com" target="_blank">Side Projects the new Growth Hack</a></li>
-      <li class="list-item-3"><a href="http://needwant.com" target="_blank">Building a Digital Marketing Machine</a></li>
-      <li class="list-item-3"><a href="http://needwant.com" target="_blank">An introduction to Technology Stack for Non Tech Founders</a></li>
+      <li *ngFor="let resource of resources" class="list-item-3"><a href="{{resource.link}}" target="_blank">{{resource.title}}</a></li>
     </ul>
   </div>
   <div class="about m-t-50">
@@ -26,15 +22,15 @@
         <h4 class="name">SAKSHAM JAIN</h4>
         <span class="heading">Product Engineer at TapChief</span>
         <p class="summary">
-          I work with high impact businesses solving difficult global problems.
-          I help teams truly understand customers, design seamless experiences, implement agile best practices and advanced analytics frameworks to build better products.
-          I blend my engineering skills with entrepreneurship to take impactful product ideas to market.
+          As a product leader, I blend engineering with entrepreneurship to develop product ideas into impactful businesses.
+          I aim to truly understand customers needs and provide big values through seamless experiences and advanced analytics frameworks.
+          Technically I hold expertise in <strong>Full Stack Development</strong> with skills like Angular, Django and REST APIs.
         </p>
       </div>
     </div>
   </div>
 </div>
-<div class="footer m-l-r-30">
+<div class="footer">
   <div class="social">
     <ul class="social-icons">
       <!--<li><a href="" target="_blank" class="social-icon"> <i class="fa fa-facebook"></i></a></li>-->

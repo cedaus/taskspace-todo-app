@@ -1,10 +1,18 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {ResourceService} from './_shared/resource.service';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: [],
+  providers: [ResourceService]
 })
-export class AppComponent {
-  title = 'app';
+export class AppComponent implements OnInit {
+  resources: any;
+  constructor(private resourceService: ResourceService) { }
+  ngOnInit(): void {
+    this.resourceService.getResources().then(data => {
+      this.resources = data;
+    });
+  }
 }
