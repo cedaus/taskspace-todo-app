@@ -1,3 +1,4 @@
+/*===================header========================*/
 /*
 
  */
@@ -14,7 +15,7 @@
   font-size: 24px;
   font-family: proxima-nova, sans-serif;
 }
-
+/*===================content========================*/
 /*
 
  */
@@ -37,14 +38,6 @@
 
  */
 
-.social {
-  text-align: center;
-}
-
-.social .social-icon {
-  background-color: rgba(255, 255, 255, 0.2);
-}
-
 /*
 
  */
@@ -58,7 +51,38 @@
   line-height: 50px;
   font-weight: 300;
 }
+/*
 
+ */
+ul, menu, dir {
+  display: block;
+  list-style-type: disc;
+  -webkit-margin-before: 1em;
+  -webkit-margin-after: 1em;
+  -webkit-margin-start: 0px;
+  -webkit-margin-end: 0px;
+  -webkit-padding-start: 40px;
+}
+.unordered-list-2 {
+    margin-bottom: 50px;
+    margin-left: -23px;
+}
+.list-item-3 {
+  width: 260px;
+  margin-right: 43px;
+  margin-bottom: 7px;
+  float: left;
+  font-family: 'Roboto Mono', sans-serif;
+  color: #fff;
+  font-size: 15px;
+}
+.list-item-3 a {
+  color: #fafbfc;
+  text-decoration: none;
+}
+.list-item-3 a:hover {
+  text-decoration: underline;
+}
 /*
 
  */
@@ -66,12 +90,78 @@
   padding: 20px auto;
   border-top: 1px dotted #fff;
 }
+.about-me {
+  width:100%;
+  height: 100%;
+}
 
-.about-me img {
+.about-me-img {
+  float:left;
+  display:inline-block;
+  width: 100px;
+  height: 100%;
+}
+
+.about-me-text {
+  float:left;
+  display:inline-block;
+  padding: 0px 25px;
+  width: -moz-calc(100% - 200px);
+  width: -webkit-calc(100% - 200px);
+  width: calc(100% - 200px);
+  height: 100%;
+}
+
+.about-me-img img {
   padding: 3px;
   width: 100px;
   height: auto;
   border-radius: 5px;
   box-shadow: 0 0 6px 2px rgba(16, 3, 172, .2);
   background-color: rgba(255, 255, 255, 0.2)
+}
+.about-me-text .name {
+  color: #fafbfc;
+  margin-top: 0px;
+  margin-bottom: 0px;
+  font-family: proxima-nova, sans-serif;
+  font-size: 14px;
+}
+.about-me-text .heading {
+  color: #fafbfc;
+  margin-top: 8px;
+  font-family: proxima-nova, sans-serif;
+  font-size: 12px;
+  opacity: 0.8;
+  text-transform: uppercase;
+}
+.about-me-text .summary {
+  margin-top: 8px;
+  color: #fafbfc;
+  font-family: proxima-nova, sans-serif;
+  font-size: 15px;
+  opacity: 0.9;
+  line-height: 1.4;
+}
+/*===================footer========================*/
+.footer {
+  position: fixed;
+  bottom: 10px;
+  right: 7px;
+}
+/*
+SOCIAL
+ */
+.fa-facebook, .fa-twitter, .fa-linkedin {
+  padding: 10px 0px;
+  width: 38px;
+  text-align: center;
+  font-size: 10px;
+  border-radius: 50%;
+  border: solid 2px white;
+  background: transparent;
+}
+.fa:hover {
+  color: #2e3192;
+  background-color: #fafbfc;
 }

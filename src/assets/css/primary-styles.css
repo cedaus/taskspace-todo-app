@@ -7,3 +7,19 @@ html {
   background-repeat:no-repeat;
   background: linear-gradient(45deg, #27aae1, #2e3192);
 }
+
+body {
+  position: fixed;
+}
+
+.clearfix:before, .clearfix:after {
+    content: " ";
+    display: table;
+}
+.clearfix:after {
+    clear: both;
+}
+.clearfix:before, .w-clearfix:after {
+    content: " ";
+    display: table;
+}
