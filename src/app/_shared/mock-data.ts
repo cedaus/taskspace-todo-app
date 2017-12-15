@@ -21,4 +21,24 @@ export const RESOURCES: Resource[] = [
     link: 'https://medium.com/cero-people/building-a-digital-marketing-machine-80692e033cb8',
     tag: 'digital-marketing'
   },
+  {
+    title: 'Standards to write REST APIs',
+    link: 'https://docs.google.com/document/d/1aQixJiqWjSKu-v4PDBMKrpUsth5wSy8XMnDZvYv-9Vk/edit?usp=sharing',
+    tag: 'rest-api'
+  },
+  {
+    title: 'An Intro of Technology Stack for Non-Tech Person',
+    link: 'https://docs.google.com/document/d/1aJ2ixbkpiQeEgl8zO4Z_cLQBjDYYWCZlf2S8AIdButM/edit?usp=sharing',
+    tag: 'technology'
+  },
+  {
+    title: 'Conversational Commerce with Chatbots',
+    link: 'https://docs.google.com/document/d/1AUK1AzhL2qR0j_t38ks4q_oyCcJpKU7Peu3SU9ki5ag/edit?usp=sharing',
+    tag: 'chatbot'
+  },
+  {
+    title: 'Building Frontend Web Apps with Angular',
+    link: 'https://docs.google.com/document/d/1JxAHto1FaB7ari6kjuhtdyfN0rco6Bbe8IAfOrsXsBU/edit?usp=sharing',
+    tag: 'angular'
+  }
 ]
