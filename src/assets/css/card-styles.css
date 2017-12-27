@@ -1,0 +1,11 @@
+.card {
+  position: relative;
+  margin: auto;
+  max-width: 550px;
+  min-width: 300px;
+  min-height: 600px;
+  color: rgba(0,0,0, 0.87);
+  background: #fff;
+  box-shadow: 0 0 1em hsla(0, 0%, 0%, 0.55);
+  border-radius: 5px;
+}
