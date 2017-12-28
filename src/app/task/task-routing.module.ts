@@ -9,7 +9,7 @@ const routes: Routes = [
     path: 'task',
     children: [
       { path: 'categories', component: TaskCategoriesComponent},
-      { path: 'lists/:category_id', component: TaskListsComponent},
+      { path: 'lists', component: TaskListsComponent},
     ]
   },
 ];

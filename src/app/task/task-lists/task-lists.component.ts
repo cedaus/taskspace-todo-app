@@ -1,4 +1,5 @@
 import {Component, OnInit} from '@angular/core';
+import {TaskService} from '../../_core/services/task.service';
 // PROJECT
 
 @Component({
@@ -8,11 +9,22 @@ import {Component, OnInit} from '@angular/core';
 })
 
 export class TaskListsComponent implements OnInit {
-  user: any;
-
-  constructor() {
+  selected_category_id = 1;
+  completed_tasks = [];
+  incompleted_tasks = [];
+  constructor(private taskService: TaskService) {
   }
 
   ngOnInit(): void {
+    this.taskService.getTasksForCategory(this.selected_category_id).subscribe((res) => {
+      this.completed_tasks = this.segregateTasks(res['tasks'], true);
+      this.incompleted_tasks = this.segregateTasks(res['tasks'], false);
+    }, err => {});
+  }
+
+  segregateTasks(tasks, completed: boolean) {
+    return tasks.filter(function(task) {
+        return task.completed = completed;
+      });
   }
 }

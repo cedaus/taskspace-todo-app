@@ -12,16 +12,9 @@
       </div>
       <div class="task__content">
         <ul class="task-lists">
-          <li>
+          <li *ngFor="let task of completed_tasks">
             <input type="checkbox"/>
-            <input type="text" value="Go Running"/><span class="delete-btn"></span>
-          </li>
-          <li>
-            <input type="checkbox"/>
-            <input type="text" value="Grocery Shopping"/><span class="delete-btn"></span>
-          </li>
-          <li id="displayTask">
-            <input type="text" value=" "/>
+            <input type="text" value="{{task.title}}"/><span class="delete-btn"></span>
           </li>
         </ul>
         <ul id="uncompleted"></ul>
