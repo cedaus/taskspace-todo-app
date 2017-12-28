@@ -1,0 +1,181 @@
+//utilities
+@function em($u) {@return ($u/16)+em;}
+@function color($shades, $shade: 'base') {
+  @return map-get(map-get($color, $shades), $shade);
+}
+
+//config
+$font-primary: 'Nunito', sans-serif;
+$font-icons: FontAwesome;
+$color-primary: #4070b1;
+$border-radius: em(5);
+$color: (
+  light: (
+    base 		 : hsl(0, 0%, 92%),
+  ),
+  primary: (
+    light    : lighten($color-primary, 60%),
+    base     : $color-primary,
+    dark     : darken($color-primary, 10%),
+    x-dark   : darken($color-primary, 30%),
+  )
+);
+
+// Extends
+%text-base {
+	font-family: $font-primary;
+  font-size: 1em;
+  line-height: 1.5;
+}
+
+// global styles
+
+
+//header
+h3 {
+	@extend %text-base;
+  margin-bottom: em(18);
+	font-weight: 400;
+}
+ul {
+	list-style: none;
+	padding:0;
+	margin:0;
+}
+//li items
+.task-lists li {
+	position: relative;
+	padding: em(18) 0;
+	border-bottom: 1px dashed;
+}
+//inputs
+input {
+	@extend %text-base;
+	color: inherit;
+	outline: none;
+	border: none;
+	background: none;
+}
+input[type="text"] {
+	padding: 0 em(6);
+	text-transform: capitalize;
+	width: 80%;
+}
+//checkbox
+input[type="checkbox"] {
+	position: relative;
+	-webkit-appearance: none;
+	//visibility: hidden;
+	width: 1em;
+	height: 1em;
+	vertical-align: middle;
+	bottom: em(2);
+	&:before, &:after {
+		//visibility: visible;
+		display: block;
+		position: absolute;
+		box-sizing: border-box;
+		cursor: pointer;
+		font: 1em $font-icons;
+		width: 1em;
+		height: 1em;
+	}
+	&:before {
+		content: "";
+		border: em(2) solid;
+		border-radius: $border-radius;
+		box-shadow: inset em(0) em(1) em(1) hsla(0, 0%, 0%, 0.67),
+											em(0) em(1) em(0) hsla(0, 0%, 100%, 0.4);
+		opacity: .3;
+	} //Check-'sign'
+	&:after {
+		content: "\f00c";
+		bottom: em(1);
+		left: em(1);
+		opacity: 0;
+	}
+	&:hover {
+		&:after {opacity: 1;}
+	}
+	&:checked {
+		&:after {opacity: 1;}
+		&:before {
+			opacity: 0;
+			background: linear-gradient(color(primary, x-dark), transparent);
+		}
+		@media only screen and (max-device-width:480px) {
+			&:before{opacity: 1;}
+			&:after{opacity: 1; color: color(light);}
+		}
+	}
+}
+
+
+
+// todo app
+.task {
+  margin: auto;
+  box-shadow: 0 0 1em hsla(0, 0%, 0%, 0.55);
+  padding: em(30) em(30) em(30);
+  background: color(light);
+  border-radius: $border-radius;
+	@media only screen and (min-device-width:480px) {
+		max-width: em(550);
+		min-width: em(350);
+    min-height: em(650);
+	}
+	> div {
+		position: relative;
+	}
+
+  &__header {
+    border-color: color(primary);
+    border-bottom: em(3) solid;
+  }
+
+	&__content {
+		background: color(light);
+		color: color(primary);
+		li:hover {
+			color: color(primary, dark);
+			input[type="checkbox"] {
+				&:after {
+					color: color(primary);
+					opacity: 1;
+				}
+				&:hover:after {
+					color: color(primary, dark);
+					opacity: 1;
+				}
+			}
+		}
+	}
+
+}
+//#displayTask
+#displayTask {
+	display: none;
+	.delete-btn { display: none; }
+	input[type="checkbox"] { display: none; }
+}
+//.delete-btn
+.delete-btn {
+	position: absolute;
+	@extend %text-base;
+	font-family: $font-icons;
+	cursor: pointer;
+	right: -0.5em;
+	visibility: hidden;
+	transition: .2s ease-in;
+	&:after {
+		content: "\f040";
+	}
+	&:hover:after {
+		content: "\f00d";
+	}
+
+}
+li:hover .delete-btn {
+	right: 0.5em;
+	visibility: visible;
+}
