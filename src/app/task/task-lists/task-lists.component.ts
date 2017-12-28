@@ -12,6 +12,7 @@ export class TaskListsComponent implements OnInit {
   selected_category_id = 1;
   completed_tasks = [];
   incompleted_tasks = [];
+  showCompleted = false;
   constructor(private taskService: TaskService) {
   }
 
@@ -24,7 +25,8 @@ export class TaskListsComponent implements OnInit {
 
   segregateTasks(tasks, completed: boolean) {
     return tasks.filter(function(task) {
-        return task.completed = completed;
-      });
+      console.log(task);
+      return task.completed === completed;
+    });
   }
 }
