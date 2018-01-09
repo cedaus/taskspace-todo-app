@@ -13,6 +13,7 @@ export class TaskListsComponent implements OnInit {
   completed_tasks = [];
   incompleted_tasks = [];
   showCompleted = false;
+  taskInfo: boolean = false;
 
   // Errors, Modals, Loaders
   error = null;
@@ -34,6 +35,12 @@ export class TaskListsComponent implements OnInit {
   }
 
   // Actions on Tasks
+  add() {
+    this.taskInfo = true;
+  }
+  close() {
+    this.taskInfo = false;
+  }
   toggleTask(task) {
     const context = {task_id: task.id, completed: !task.completed};
     this.taskService.updateTask(task.id, context).subscribe(res => {
