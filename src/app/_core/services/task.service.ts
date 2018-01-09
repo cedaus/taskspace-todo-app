@@ -12,4 +12,10 @@ export class TaskService {
   getTasksForCategory(category_id) {
     return this.raw.get(`${this.TASK_URL}/category-tasks/?category_id=${category_id}`);
   }
+  updateTask(task_id, context) {
+    return this.auth.post(`${this.TASK_URL}/task/${task_id}/`, JSON.stringify(context));
+  }
+  deleteTask(task_id) {
+    return this.auth.delete(`${this.TASK_URL}/task/${task_id}/`);
+  }
 }

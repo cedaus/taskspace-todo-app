@@ -13,6 +13,10 @@ export class TaskListsComponent implements OnInit {
   completed_tasks = [];
   incompleted_tasks = [];
   showCompleted = false;
+
+  // Errors, Modals, Loaders
+  error = null;
+
   constructor(private taskService: TaskService) {
   }
 
@@ -25,8 +29,50 @@ export class TaskListsComponent implements OnInit {
 
   segregateTasks(tasks, completed: boolean) {
     return tasks.filter(function(task) {
-      console.log(task);
       return task.completed === completed;
     });
+  }
+
+  // Actions on Tasks
+  toggleTask(task) {
+    const context = {task_id: task.id, completed: !task.completed};
+    this.taskService.updateTask(task.id, context).subscribe(res => {
+      this.postToggleTask(res);
+    }, err => {
+      this.error = err;
+    });
+  }
+  deleteTask(task) {
+    this.taskService.deleteTask(task.id).subscribe(res => {
+      this.postDeleteTask(task);
+    }, err => {
+      this.error = err;
+    });
+  }
+
+  //
+  postToggleTask(task) {
+    if (task.completed) {
+      this.completed_tasks.push(task);
+      this.incompleted_tasks = this.incompleted_tasks.filter(item => {
+        return item.id !== task.id;
+      });
+    } else {
+      this.incompleted_tasks.push(task);
+      this.completed_tasks = this.completed_tasks.filter(item => {
+          return item.id !== task.id;
+      });
+    }
+  }
+  postDeleteTask(task) {
+    if (task.completed) {
+      this.completed_tasks = this.completed_tasks.filter(item => {
+          return item.id !== task.id;
+      });
+    } else {
+      this.incompleted_tasks = this.incompleted_tasks.filter(item => {
+        return item.id !== task.id;
+      });
+    }
   }
 }
