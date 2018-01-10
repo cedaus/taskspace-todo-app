@@ -3,8 +3,7 @@
     <div class="col-7">
       <h4 class="big-heading">Hi Saksham, this is your task space.</h4>
       <div class="mt50">
-        <button class="category-btn">General</button>
-        <button class="category-btn">General</button>
+        <button *ngFor="let category of categories" (click)="selectCategory(category)" class="category-btn">{{category.name}}</button>
       </div>
     </div>
     <div class="col-5">

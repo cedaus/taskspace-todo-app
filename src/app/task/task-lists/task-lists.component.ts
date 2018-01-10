@@ -10,7 +10,9 @@ import {Task, ReverseTask} from '../../_core/models/task.models';
 })
 
 export class TaskListsComponent implements OnInit {
-  selected_category_id = 1;
+  categories = [];
+  selectedCategoryID: null;
+  // Task
   completedTasks: Task[] = [];
   incompletedTasks: Task[] = [];
   task: Task = new Task({});
@@ -25,9 +27,20 @@ export class TaskListsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.taskService.getTasksForCategory(this.selected_category_id).subscribe((res) => {
+    this.taskService.getCategories().subscribe(res => {
+      this.categories = res['categories'];
+      this.selectCategory(this.categories[0]);
+    }, err => {
+      this.error = err;
+    });
+  }
+
+  selectCategory(category) {
+    this.selectedCategoryID = category.id;
+    this.taskService.getTasksForCategory(category.id).subscribe((res) => {
       this.completedTasks = this.segregateTasks(res['tasks'], true);
       this.incompletedTasks = this.segregateTasks(res['tasks'], false);
+      this.showCompleted = false;
     }, err => {
       this.error = err;
     });
@@ -50,6 +63,9 @@ export class TaskListsComponent implements OnInit {
   }
 
   // Actions on Tasks
+  refreshTask() {
+    this.task = new Task({});
+  }
   toggleTask(task) {
     this.error = null;
     const context = {task_id: task.id, completed: !task.completed};
@@ -69,7 +85,7 @@ export class TaskListsComponent implements OnInit {
   }
   saveTask() {
     this.error = null;
-    this.task['categoryId'] = this.selected_category_id;
+    this.task['categoryId'] = this.task['categoryId'] || this.selectedCategoryID;
     if (this.preSaveTask()) {
       const context = new ReverseTask(this.task);
       this.taskService.createTask(context).subscribe(res => {
@@ -115,6 +131,7 @@ export class TaskListsComponent implements OnInit {
     }
   }
   postSaveTask(task) {
+    this.refreshTask();
     if (task.completed) {
       this.completedTasks.push(task);
     } else {
