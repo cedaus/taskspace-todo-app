@@ -41,14 +41,17 @@ export class TaskListsComponent implements OnInit {
 
   // Button Triggers
   add() {
+    this.error = null;
     this.taskInfo = true;
   }
   close() {
+    this.error = null;
     this.taskInfo = false;
   }
 
   // Actions on Tasks
   toggleTask(task) {
+    this.error = null;
     const context = {task_id: task.id, completed: !task.completed};
     this.taskService.updateTask(task.id, context).subscribe(res => {
       this.postToggleTask(new Task(res));
@@ -57,6 +60,7 @@ export class TaskListsComponent implements OnInit {
     });
   }
   deleteTask(task) {
+    this.error = null;
     this.taskService.deleteTask(task.id).subscribe(res => {
       this.postDeleteTask(task);
     }, err => {
@@ -64,13 +68,25 @@ export class TaskListsComponent implements OnInit {
     });
   }
   saveTask() {
+    this.error = null;
     this.task['categoryId'] = this.selected_category_id;
-    const context = new ReverseTask(this.task);
-    this.taskService.createTask(context).subscribe(res => {
-      this.postSaveTask(new Task(res));
-    }, err => {
-      this.error = err;
-    });
+    if (this.preSaveTask()) {
+      const context = new ReverseTask(this.task);
+      this.taskService.createTask(context).subscribe(res => {
+        this.postSaveTask(new Task(res));
+      }, err => {
+        this.error = err;
+      });
+    }
+  }
+
+  // Pre Actions
+  preSaveTask() {
+    if (!this.task.title) {
+      this.error = 'Please fill the task title!'
+      return false;
+    }
+    return true;
   }
 
   // Post Actions
