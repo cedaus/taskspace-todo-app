@@ -51,7 +51,7 @@ export class TaskListsComponent implements OnInit {
   toggleTask(task) {
     const context = {task_id: task.id, completed: !task.completed};
     this.taskService.updateTask(task.id, context).subscribe(res => {
-      this.postToggleTask(res);
+      this.postToggleTask(new Task(res));
     }, err => {
       this.error = err;
     });
@@ -66,8 +66,8 @@ export class TaskListsComponent implements OnInit {
   saveTask() {
     this.task['categoryId'] = this.selected_category_id;
     const context = new ReverseTask(this.task);
-    this.taskService.createTask(null, context).subscribe(res => {
-      console.log(res);
+    this.taskService.createTask(context).subscribe(res => {
+      this.postSaveTask(new Task(res));
     }, err => {
       this.error = err;
     });
@@ -97,5 +97,14 @@ export class TaskListsComponent implements OnInit {
         return item.id !== task.id;
       });
     }
+  }
+  postSaveTask(task) {
+    if (task.completed) {
+      this.completedTasks.push(task);
+    } else {
+      this.incompletedTasks.push(task);
+    }
+    this.showCompleted = task.completed;
+    this.close();
   }
 }

@@ -12,8 +12,8 @@ export class TaskService {
   getTasksForCategory(category_id) {
     return this.raw.get(`${this.TASK_URL}/category-tasks/?category_id=${category_id}`);
   }
-  createTask(task_id, context) {
-    return this.auth.put(`${this.TASK_URL}/task/${task_id}/`, JSON.stringify(context));
+  createTask(context) {
+    return this.auth.post(`${this.TASK_URL}/task/new/`, JSON.stringify(context));
   }
   updateTask(task_id, context) {
     return this.auth.post(`${this.TASK_URL}/task/${task_id}/`, JSON.stringify(context));
