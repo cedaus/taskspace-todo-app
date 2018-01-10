@@ -8,17 +8,13 @@
   padding: 10px;
   cursor: pointer;
   border-radius: 3px;
+  border: 1px solid #EBEBEB;
 }
 .nav-tabs li.active {
-  color: #ffffff;
-  background: #2b2130;
-}
-.nav-tabs li.active:hover {
-  color: #ffffff;
-  background: #2b2130;
+  background: #B5B9BF;
+  border: 1px solid #A0A0A0;
 }
 .nav-tabs li:hover {
-  background: linear-gradient(45deg, #27aae1, #2e3192);
+  border: 1px solid #A0A0A0;
   border-radius: 2px;
-  color: #ffffff;
 }

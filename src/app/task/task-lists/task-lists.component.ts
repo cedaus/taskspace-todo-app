@@ -18,7 +18,7 @@ export class TaskListsComponent implements OnInit {
   task: Task = new Task({});
   // Toggles
   showCompleted = false;
-  taskInfo: boolean = false;
+  showTaskInfo: boolean = false;
 
   // Errors, Modals, Loaders
   error = null;
@@ -40,7 +40,7 @@ export class TaskListsComponent implements OnInit {
     this.taskService.getTasksForCategory(category.id).subscribe((res) => {
       this.completedTasks = this.segregateTasks(res['tasks'], true);
       this.incompletedTasks = this.segregateTasks(res['tasks'], false);
-      this.showCompleted = false;
+      this.reset();
     }, err => {
       this.error = err;
     });
@@ -53,19 +53,25 @@ export class TaskListsComponent implements OnInit {
   }
 
   // Button Triggers
+  reset() {
+    this.error = null;
+    this.showCompleted = false;
+    this.showTaskInfo = false;
+  }
   add() {
     this.error = null;
-    this.taskInfo = true;
+    this.showTaskInfo = true;
   }
   close() {
     this.error = null;
-    this.taskInfo = false;
+    this.showTaskInfo = false;
   }
 
   // Actions on Tasks
   refreshTask() {
     this.task = new Task({});
   }
+
   toggleTask(task) {
     this.error = null;
     const context = {task_id: task.id, completed: !task.completed};

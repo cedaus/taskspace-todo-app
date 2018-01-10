@@ -15,7 +15,8 @@ $color-blue-base: #4070B5;
 $color-blue-dark: #3E68B0;
 $color-blue-darker: #3959A5;
 $color-white-base: #FFFFFF;
-$color-white-dark: #EBEBEB;
+$color-white-dark: #FAFBFC;
+$color-white-darker: #EBEBEB;
 $color-grey-dark: #B5B9BF;
 $color-grey-darker: #A0A0A0;
 
@@ -313,10 +314,10 @@ li:hover .delete-btn {
 }
 .category-btn.active {
   background-color: $color-white-base;
-  border-color: $color-white-dark;
+  border-color: $color-white-darker;
 }
 .category-btn:hover {
-  border-color: $color-white-dark;
+  border-color: $color-white-darker;
 }
 
 
@@ -329,7 +330,7 @@ li:hover .delete-btn {
     position: relative;
     top: -4px;
     margin-left: 7px;
-    color: $color-white-dark;
+    color: $color-white-darker;
     font-weight: bold;
   }
 }
