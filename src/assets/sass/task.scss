@@ -53,12 +53,7 @@ ul {
 	padding:0;
 	margin:0;
 }
-//li items
-.task-lists li {
-	position: relative;
-	padding: em(18) 0;
-	border-bottom: 1px dashed;
-}
+
 //inputs
 input {
 	@extend %text-base;
@@ -177,6 +172,11 @@ input[type="checkbox"] {
 // todo app
 .task-list {
   color: color(primary);
+  ul li {
+	  position: relative;
+	  padding: em(18) 0;
+	  border-bottom: 1px dashed;
+  }
   li:hover {
     color: color(primary, dark);
     input[type="checkbox"] {
