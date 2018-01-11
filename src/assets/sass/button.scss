@@ -1,0 +1,21 @@
+//* --------Text Arrow Button------- *//
+.text-arrow-btn {
+  position: relative;
+  top: -4px;
+  cursor: pointer;
+  opacity: 0.8;
+  &:hover {
+     opacity: 1;
+  }
+
+  span {
+    position: relative;
+    top: -4px;
+    color: $color-white-darker;
+    font-weight: 500;
+  }
+
+  svg {
+    margin-left: 5px;
+  }
+}
