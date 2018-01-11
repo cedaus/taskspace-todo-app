@@ -121,10 +121,8 @@ input[type="checkbox"] {
 	}
 }
 
-
-
-// todo app
-.task {
+// Card
+.dyno-card-1 {
   margin: auto;
   box-shadow: 0 0 1em hsla(0, 0%, 0%, 0.55);
   padding: em(30) em(30) em(30);
@@ -140,32 +138,18 @@ input[type="checkbox"] {
 	}
 
   &__header {
+    min-height: 35px;
     border-color: color(primary);
     border-bottom: em(3) solid;
   }
 
 	&__content {
-    height: 400px;
-		background: color(light);
-		color: color(primary);
-		li:hover {
-			color: color(primary, dark);
-			input[type="checkbox"] {
-				&:after {
-					color: color(primary);
-					opacity: 1;
-				}
-				&:hover:after {
-					color: color(primary, dark);
-					opacity: 1;
-				}
-			}
-		}
+    min-height: 400px;
 	}
 
 }
 
-.task-info {
+.dyno-card-2 {
   margin: auto;
   box-shadow: 0 0 1em hsla(0, 0%, 0%, 0.55);
   padding: em(30) em(30) em(30);
@@ -181,24 +165,48 @@ input[type="checkbox"] {
   }
 
   &__header {
-    height: 30px;
+    height: 35px;
   }
   &__content {
     min-height: 400px;
-    .heading {
-      color: $color-white-base;
+  }
+}
+
+
+
+// todo app
+.task-list {
+  color: color(primary);
+  li:hover {
+    color: color(primary, dark);
+    input[type="checkbox"] {
+      &:after {
+        color: color(primary);
+        opacity: 1;
+      }
+      &:hover:after {
+        color: color(primary, dark);
+        opacity: 1;
+      }
     }
-    .title-input {
-      display: block;
-      margin: 0px;
-      height: 50px;
-      width: 100%;
-      border: 1px solid $color-blue-dark;
-      border-radius: 2px;
-      background: $color-blue-dark;
-      color: $color-white-base;
-      font-size: 18px;
-    }
+  }
+}
+
+
+.task-info {
+  .heading {
+    color: $color-white-base;
+  }
+  .title-input {
+    display: block;
+    margin: 0px;
+    height: 50px;
+    width: 100%;
+    border: 1px solid $color-blue-dark;
+    border-radius: 2px;
+    background: $color-blue-dark;
+    color: $color-white-base;
+    font-size: 18px;
   }
 }
 
