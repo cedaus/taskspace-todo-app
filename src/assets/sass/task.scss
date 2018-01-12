@@ -299,10 +299,10 @@ li:hover .delete-btn {
 	border-radius: 50%;
 	border: 1px solid $color-grey-darker;
 	cursor: pointer;
-}
-.add-btn:hover {
-  background: $color-grey-dark;
-  transform: scale(1.3) perspective(1px)
+  &:hover {
+    background: $color-grey-dark;
+    transform: scale(1.3) perspective(1px)
+  }
 }
 
 
@@ -317,11 +317,11 @@ li:hover .delete-btn {
 	border-radius: 50%;
 	border: 1px solid $color-blue-dark;
 	cursor: pointer;
-}
-.close-btn:hover {
-  background: $color-blue-dark;
-  border: 1px solid $color-blue-darker;
-  transform: scale(1.5) perspective(1px)
+  &:hover {
+    background: $color-blue-dark;
+    border: 1px solid $color-blue-darker;
+    transform: scale(1.5) perspective(1px)
+  }
 }
 
 
@@ -340,10 +340,10 @@ li:hover .delete-btn {
 	background: $color-blue-dark;
   border: 1px solid $color-blue-darker;
 	cursor: pointer;
-}
-.save-btn:hover {
-  background: $color-white-base;
-  border: 1px solid $color-white-base;
+  &:hover {
+    background: $color-white-base;
+    border: 1px solid $color-white-base;
+  }
 }
 
 
@@ -364,11 +364,24 @@ li:hover .delete-btn {
   -webkit-transition: 0.15s linear;
   transition: 0.15s linear;
   cursor: pointer;
+  &.active {
+    background-color: $color-white-base;
+    border-color: $color-white-darker;
+  }
+  &:hover {
+    border-color: $color-white-darker;
+  }
 }
-.category-btn.active {
-  background-color: $color-white-base;
-  border-color: $color-white-darker;
+
+#important-switch {
+  top: -6px;
 }
-.category-btn:hover {
-  border-color: $color-white-darker;
+
+#important-label {
+  position: relative;
+  top: -28px;
+  margin-left: 60px;
+  font-size: 15px;
+  color: #FFFFFF;
+  opacity: 0.5;
 }

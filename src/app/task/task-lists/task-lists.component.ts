@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 // PROJECT
 import {TaskService} from '../../_core/services/task.service';
 import {Task, ReverseTask} from '../../_core/models/task.models';
@@ -16,12 +16,16 @@ export class TaskListsComponent implements OnInit {
   completedTasks: Task[] = [];
   incompletedTasks: Task[] = [];
   task: Task = new Task({});
+  // Important
+  showImportant = false;
+  textImportant = 'Showing all tasks'
   // Toggles
   showCompleted = false;
   showTaskInfo: boolean = false;
 
   // Errors, Modals, Loaders
   error = null;
+  @ViewChild('importantToggle') importantToggle;
 
   constructor(private taskService: TaskService) {
   }
@@ -50,6 +54,16 @@ export class TaskListsComponent implements OnInit {
     return tasks.filter(function(task) {
       return task.completed === completed;
     });
+  }
+
+  toggleImportant() {
+    if (this.showImportant) {
+      this.importantToggle.nativeElement.classList.add('active');
+      this.textImportant = 'Showing only Important Tasks';
+    } else {
+      this.importantToggle.nativeElement.classList.remove('active');
+      this.textImportant = 'Showing all Tasks';
+    }
   }
 
   // Button Triggers

@@ -19,3 +19,36 @@
     margin-left: 5px;
   }
 }
+
+
+.switch {
+  position: relative;
+  width:55px;
+  padding:5px;
+  border:2px solid #FFFFFF;
+  box-sizing:border-box;
+  opacity:0.5;
+  -webkit-filter:grayscale(100%);
+  -webkit-transition:all 03s;
+  transition:all 0.3s;
+  border-radius:540px;
+  cursor:pointer;
+
+  &-circle {
+    width:12px;
+    height:12px;
+    background:#FFFFFF;
+    border-radius:100%;
+    position:relative;
+    transition:all 0.3s;
+    left:0;
+    -webkit-transition:all 0.3s;
+  }
+  &.active {
+    -webkit-filter:none;
+    opacity:0.85
+  }
+  &.active &-circle {
+    left: 28px;
+  }
+}

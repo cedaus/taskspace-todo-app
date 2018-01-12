@@ -1,8 +1,15 @@
 <div class="content">
   <div class="row">
     <div class="col-7">
-      <h4 class="big-heading">Your TaskSpace.</h4>
-      <div class="mt50">
+      <h4 class="big-heading">Your TaskSpace</h4>
+      <div class="mt30">
+        <div #importantToggle id="important-switch" class="switch" (click)="showImportant = !showImportant; toggleImportant()">
+          <div class="switch-circle">
+          </div>
+        </div>
+        <span id="important-label">{{textImportant}}</span>
+      </div>
+      <div class="mt10">
         <button *ngFor="let category of categories" (click)="selectCategory(category)" class="category-btn">{{category.name}}</button>
       </div>
       <div [routerLink]="['/tasks/categories']" class="text-arrow-btn mt20">
