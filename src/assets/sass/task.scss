@@ -126,8 +126,7 @@ input[type="checkbox"] {
 	@media only screen and (min-device-width:480px) {
 		max-width: em(550);
 		min-width: em(350);
-    min-height: em(650);
-    max-height: em(850);
+    height: em(650);
 	}
 	> div {
 		position: relative;
@@ -155,7 +154,7 @@ input[type="checkbox"] {
   @media only screen and (min-device-width: 480px) {
     max-width: em(550);
     min-width: em(350);
-    min-height: em(650);
+    height: em(650);
   }
   > div {
     position: relative;
@@ -173,7 +172,13 @@ input[type="checkbox"] {
 
 // todo app
 .task-list {
+  padding-top: 5px;
   color: color(primary);
+  max-height: 450px;
+  overflow-y: scroll;
+  &::-webkit-scrollbar {
+    display: none;
+  }
   li {
 	  position: relative;
 	  padding: em(18) 0;
@@ -225,6 +230,31 @@ input[type="checkbox"] {
   }
 }
 
+.category-list {
+  padding-bottom: 5px;
+  max-height: 450px;
+  overflow-y: scroll;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+.category-box {
+  margin-top: 10px;
+  margin-left: 3px;
+  margin-right: 3px;
+  height: 120px;
+  width: 48.3%;
+  border: 0px solid $color-grey-dark;
+  box-shadow: 0 3px 10px rgba(0,0,0,.05);
+  //box-shadow: 0 2px 2px 0 rgba(0,0,0,0.16), 0 0 0 1px rgba(0,0,0,0.08);
+  line-height: 120px;
+  text-align: center;
+  cursor: pointer;
+  &:hover {
+    background: $color-grey-dark;
+  }
+}
 
 //#displayTask
 #displayTask {
@@ -340,35 +370,4 @@ li:hover .delete-btn {
 }
 .category-btn:hover {
   border-color: $color-white-darker;
-}
-
-.category-list {
-  padding-bottom: 5px;
-  max-height: 550px;
-  overflow-y: scroll;
-  &::-webkit-scrollbar {
-    display: none;
-  }
-}
-
-.category-box {
-  margin-top: 10px;
-  margin-left: 3px;
-  margin-right: 3px;
-  height: 120px;
-  width: 48.3%;
-  border: 0px solid $color-grey-dark;
-  box-shadow: 0 3px 10px rgba(0,0,0,.05);
-  //box-shadow: 0 2px 2px 0 rgba(0,0,0,0.16), 0 0 0 1px rgba(0,0,0,0.08);
-  line-height: 120px;
-  text-align: center;
-  &:hover {
-    background: $color-grey-dark;
-  }
-}
-
-
-.hidden-scrollbar {
-    width: 0px;  /* remove scrollbar space */
-    background: transparent;  /* optional: just make scrollbar invisible */
 }

@@ -12,6 +12,15 @@ export class TaskService {
   getCategories() {
     return this.auth.get(`${this.TASK_URL}/categories/`);
   }
+  createCategory(context) {
+    return this.auth.post(`${this.TASK_URL}/category/new/`, JSON.stringify(context));
+  }
+  getCategory(category_id) {
+    return this.auth.get(`${this.TASK_URL}/task/${category_id}/`);
+  }
+  updateCategory(category_id, context) {
+    return this.auth.post(`${this.TASK_URL}/category/${category_id}/`, JSON.stringify(context));
+  }
   getTasksForCategory(category_id) {
     return this.raw.get(`${this.TASK_URL}/category-tasks/?category_id=${category_id}`);
   }

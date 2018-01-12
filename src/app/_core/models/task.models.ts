@@ -29,3 +29,13 @@ export class ReverseTask {
     this.completed = obj['completed'];
   }
 }
+
+export class TaskCategory {
+  id: number;
+  name: string;
+
+  constructor(obj) {
+    this.id = obj['id'];
+    this.name = obj['name'];
+  }
+}
