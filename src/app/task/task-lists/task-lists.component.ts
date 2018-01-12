@@ -17,16 +17,13 @@ export class TaskListsComponent implements OnInit {
   allTasks: Task[] = [];
   filteredTasks: Task[] = [];
   task: Task = new Task({});
-  // Important
-  showImportant = false;
-  textImportant = 'Showing all tasks'
   // Toggles
   showCompleted = false;
+  showImportant = false;
   showTaskInfo: boolean = false;
 
   // Errors, Modals, Loaders
   error = null;
-  @ViewChild('importantToggle') importantToggle;
 
   constructor(private taskService: TaskService) {
   }
@@ -53,18 +50,16 @@ export class TaskListsComponent implements OnInit {
 
   filterTasks() {
     this.filteredTasks = this.allTasks.filter((item) => {
-      return item.completed === this.showCompleted && item.important === this.showImportant;
+      if (this.showImportant) {
+        return item.completed === this.showCompleted && item.important === true;
+      } else {
+        return item.completed === this.showCompleted;
+      }
     });
   }
 
   toggleImportant() {
-    if (this.showImportant) {
-      this.importantToggle.nativeElement.classList.add('active');
-      this.textImportant = 'Showing only Important Tasks';
-    } else {
-      this.importantToggle.nativeElement.classList.remove('active');
-      this.textImportant = 'Showing all Tasks';
-    }
+    this.showImportant = !this.showImportant;
     this.filterTasks();
   }
 
@@ -121,7 +116,7 @@ export class TaskListsComponent implements OnInit {
   // Pre Actions
   preSaveTask() {
     if (!this.task.title) {
-      this.error = 'Please fill the task title!'
+      this.error = 'Please fill the task title!';
       return false;
     }
     return true;

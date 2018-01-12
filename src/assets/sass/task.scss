@@ -373,13 +373,22 @@ li:hover .delete-btn {
   }
 }
 
-#important-switch {
+.important-switch {
   top: -6px;
 }
 
-#important-label {
+.important-label {
   position: relative;
   top: -28px;
+  margin-left: 60px;
+  font-size: 15px;
+  color: #FFFFFF;
+  opacity: 0.5;
+}
+
+.task-important-label {
+  position: relative;
+  top: -23px;
   margin-left: 60px;
   font-size: 15px;
   color: #FFFFFF;

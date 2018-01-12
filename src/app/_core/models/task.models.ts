@@ -12,7 +12,7 @@ export class Task {
     this.title = obj['title'];
     this.description = obj['description'];
     this.completed = obj['completed'];
-    this.important = false;
+    this.important = obj['important'] || false;
   }
 }
 
@@ -22,6 +22,7 @@ export class ReverseTask {
   title: string;
   description: string;
   completed: boolean;
+  important: boolean;
 
   constructor (obj) {
     this.id = obj['id'];
@@ -29,6 +30,7 @@ export class ReverseTask {
     this.title = obj['title'];
     this.description = obj['description'];
     this.completed = obj['completed'];
+    this.important = obj['important'];
   }
 }
 
