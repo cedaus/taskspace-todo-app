@@ -39,19 +39,32 @@ export class TaskCategoriesComponent implements OnInit {
   }
   add() {
     this.error = null;
+    this.refreshCategory();
     this.showCategoryInfo = true;
   }
   close() {
     this.error = null;
     this.showCategoryInfo = false;
   }
+  edit(category) {
+    this.category = category;
+    this.error = null;
+    this.showCategoryInfo = true;
+  }
 
   // Actions on Categories
   saveCategory() {
     this.error = null;
-    if (this.preSaveCategory()) {
+    if (this.preSaveCategory() && !this.category.id) {
       this.taskService.createCategory(this.category).subscribe(res => {
-        this.postSaveCategory(new TaskCategory(res));
+        this.postCreateCategory(new TaskCategory(res));
+      }, err => {
+        this.error = err;
+      });
+    } else if (this.preSaveCategory() && this.category.id) {
+      const context = {name: this.category.name};
+      this.taskService.updateCategory(this.category.id, context).subscribe(res => {
+        this.postUpdateCategory(new TaskCategory(res));
       }, err => {
         this.error = err;
       });
@@ -66,8 +79,19 @@ export class TaskCategoriesComponent implements OnInit {
     }
     return true;
   }
-  postSaveCategory(category) {
+  postCreateCategory(category) {
     this.categories.unshift(category);
+    this.close();
+    this.refreshCategory();
+  }
+  postUpdateCategory(category) {
+    this.categories = this.categories.map((item) => {
+      if (item.id === category.id) {
+        return category;
+      } else {
+        return item;
+      }
+    })
     this.close();
     this.refreshCategory();
   }

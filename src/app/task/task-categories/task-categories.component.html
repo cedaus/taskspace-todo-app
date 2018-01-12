@@ -22,7 +22,7 @@
         <!-- Card Content -->
         <div class="dyno-card-1__content">
           <div class="row category-list">
-            <div *ngFor="let category of categories" class="col-6 category-box">{{category.name}}</div>
+            <div *ngFor="let category of categories" class="col-6 category-box" (click)="edit(category)">{{category.name}}</div>
           </div>
         </div>
       </div>
