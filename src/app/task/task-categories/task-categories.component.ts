@@ -1,4 +1,5 @@
 import {Component, OnInit} from '@angular/core';
+import {TaskService} from '../../_core/services/task.service';
 // PROJECT
 
 @Component({
@@ -9,13 +10,19 @@ import {Component, OnInit} from '@angular/core';
 
 export class TaskCategoriesComponent implements OnInit {
   user: any;
+  categories = [];
   showCategoryInfo: boolean = false;
   error = null;
 
-  constructor() {
+  constructor(private taskService: TaskService) {
   }
 
   ngOnInit(): void {
+    this.taskService.getCategories().subscribe(res => {
+      this.categories = res['categories'];
+    }, err => {
+      this.error = err;
+    });
   }
 
   // Button Triggers

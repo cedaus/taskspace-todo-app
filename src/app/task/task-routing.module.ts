@@ -6,10 +6,10 @@ import {TaskListsComponent} from './task-lists/task-lists.component';
 
 const routes: Routes = [
   {
-    path: 'task',
+    path: 'tasks',
     children: [
       { path: 'categories', component: TaskCategoriesComponent},
-      { path: 'lists', component: TaskListsComponent},
+      { path: 'list', component: TaskListsComponent},
     ]
   },
 ];
