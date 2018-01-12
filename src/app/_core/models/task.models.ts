@@ -4,6 +4,7 @@ export class Task {
   title: string;
   description: string;
   completed: boolean;
+  important: boolean;
 
   constructor (obj) {
     this.id = obj['id'];
@@ -11,6 +12,7 @@ export class Task {
     this.title = obj['title'];
     this.description = obj['description'];
     this.completed = obj['completed'];
+    this.important = false;
   }
 }
 

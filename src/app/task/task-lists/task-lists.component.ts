@@ -2,6 +2,7 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 // PROJECT
 import {TaskService} from '../../_core/services/task.service';
 import {Task, ReverseTask} from '../../_core/models/task.models';
+import {constructAll} from '../../_core/helpers/base.utils';
 
 @Component({
   selector: 'app-task-lists',
@@ -13,8 +14,8 @@ export class TaskListsComponent implements OnInit {
   categories = [];
   selectedCategoryID: null;
   // Task
-  completedTasks: Task[] = [];
-  incompletedTasks: Task[] = [];
+  allTasks: Task[] = [];
+  filteredTasks: Task[] = [];
   task: Task = new Task({});
   // Important
   showImportant = false;
@@ -42,17 +43,17 @@ export class TaskListsComponent implements OnInit {
   selectCategory(category) {
     this.selectedCategoryID = category.id;
     this.taskService.getTasksForCategory(category.id).subscribe((res) => {
-      this.completedTasks = this.segregateTasks(res['tasks'], true);
-      this.incompletedTasks = this.segregateTasks(res['tasks'], false);
+      this.allTasks = constructAll(res['tasks'], Task);
+      this.filterTasks();
       this.reset();
     }, err => {
       this.error = err;
     });
   }
 
-  segregateTasks(tasks, completed: boolean) {
-    return tasks.filter(function(task) {
-      return task.completed === completed;
+  filterTasks() {
+    this.filteredTasks = this.allTasks.filter((item) => {
+      return item.completed === this.showCompleted && item.important === this.showImportant;
     });
   }
 
@@ -64,6 +65,7 @@ export class TaskListsComponent implements OnInit {
       this.importantToggle.nativeElement.classList.remove('active');
       this.textImportant = 'Showing all Tasks';
     }
+    this.filterTasks();
   }
 
   // Button Triggers
@@ -127,37 +129,26 @@ export class TaskListsComponent implements OnInit {
 
   // Post Actions
   postToggleTask(task) {
-    if (task.completed) {
-      this.completedTasks.push(task);
-      this.incompletedTasks = this.incompletedTasks.filter(item => {
+    /*Order Matters*/
+    this.allTasks = this.allTasks.filter(item => {
         return item.id !== task.id;
-      });
-    } else {
-      this.incompletedTasks.push(task);
-      this.completedTasks = this.completedTasks.filter(item => {
-          return item.id !== task.id;
-      });
-    }
+    });
+    this.allTasks.push(task);
+    this.filterTasks();
   }
   postDeleteTask(task) {
-    if (task.completed) {
-      this.completedTasks = this.completedTasks.filter(item => {
-          return item.id !== task.id;
-      });
-    } else {
-      this.incompletedTasks = this.incompletedTasks.filter(item => {
+    /*Order Matters*/
+    this.allTasks = this.allTasks.filter(item => {
         return item.id !== task.id;
-      });
-    }
+    });
+    this.filterTasks();
   }
   postSaveTask(task) {
+    /*Order Matters*/
     this.refreshTask();
-    if (task.completed) {
-      this.completedTasks.push(task);
-    } else {
-      this.incompletedTasks.push(task);
-    }
+    this.allTasks.push(task);
     this.showCompleted = task.completed;
+    this.filterTasks();
     this.close();
   }
 }
