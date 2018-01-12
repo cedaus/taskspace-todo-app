@@ -71,11 +71,17 @@ export class TaskListsComponent implements OnInit {
   }
   add() {
     this.error = null;
+    this.refreshTask();
     this.showTaskInfo = true;
   }
   close() {
     this.error = null;
     this.showTaskInfo = false;
+  }
+  edit(task) {
+    this.task = task;
+    this.error = null;
+    this.showTaskInfo = true;
   }
 
   // Actions on Tasks
@@ -103,10 +109,17 @@ export class TaskListsComponent implements OnInit {
   saveTask() {
     this.error = null;
     this.task['categoryId'] = this.task['categoryId'] || this.selectedCategoryID;
-    if (this.preSaveTask()) {
+    if (this.preSaveTask() && !this.task.id) {
       const context = new ReverseTask(this.task);
       this.taskService.createTask(context).subscribe(res => {
-        this.postSaveTask(new Task(res));
+        this.postCreateTask(new Task(res));
+      }, err => {
+        this.error = err;
+      });
+    } else if (this.preSaveTask() && this.task.id) {
+      const context = new ReverseTask(this.task);
+      this.taskService.updateTask(this.task.id, context).subscribe(res => {
+        this.postUpdateTask(new Task(res));
       }, err => {
         this.error = err;
       });
@@ -138,10 +151,22 @@ export class TaskListsComponent implements OnInit {
     });
     this.filterTasks();
   }
-  postSaveTask(task) {
+  postCreateTask(task) {
     /*Order Matters*/
     this.refreshTask();
     this.allTasks.push(task);
+    this.showCompleted = task.completed;
+    this.filterTasks();
+    this.close();
+  }
+  postUpdateTask(task) {
+    this.allTasks = this.allTasks.map((item) => {
+      if (item.id === task.id) {
+        return task;
+      } else {
+        return item;
+      }
+    });
     this.showCompleted = task.completed;
     this.filterTasks();
     this.close();
