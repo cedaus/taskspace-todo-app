@@ -198,6 +198,21 @@ input[type="checkbox"] {
     }
   }
 }
+.task-empty-list {
+  height: 450px;
+  padding-top: 180px;
+  svg {
+    position: relative;
+    top: -10px;
+    left: 45%;
+    opacity: 0.8;
+    line-height: 450px;
+  }
+  p {
+    text-align: center;
+    text-transform: uppercase;
+  }
+}
 
 
 .task-info {
