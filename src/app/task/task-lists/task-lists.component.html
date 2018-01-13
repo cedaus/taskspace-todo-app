@@ -11,7 +11,7 @@
         <span *ngIf="!showImportant" Class="important-label">Showing all Tasks</span>
       </div>
       <div class="mt10">
-        <button *ngFor="let category of categories" (click)="selectCategory(category)" class="category-btn">{{category.name}}</button>
+        <button *ngFor="let category of categories" (click)="selectCategory(category.id)" class="category-btn">{{category.name}}</button>
       </div>
       <div [routerLink]="['/tasks/categories']" class="text-arrow-btn mt20">
         <span>Manage Categories</span>

@@ -1,8 +1,9 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 // PROJECT
 import {TaskService} from '../../_core/services/task.service';
-import {Task, ReverseTask} from '../../_core/models/task.models';
-import {constructAll} from '../../_core/helpers/base.utils';
+import {Task, ReverseTask, TaskCategory} from '../../_core/models/task.models';
+import {constructAll, bool} from '../../_core/helpers/base.utils';
+import {StorageService} from '../../_core/services/storage.service';
 
 @Component({
   selector: 'app-task-lists',
@@ -25,41 +26,29 @@ export class TaskListsComponent implements OnInit {
   // Errors, Modals, Loaders
   error = null;
 
-  constructor(private taskService: TaskService) {
+  constructor(private taskService: TaskService, private storageService: StorageService) {
   }
 
   ngOnInit(): void {
+    this.showImportant = bool(this.storageService.get('showImportant'));
     this.taskService.getCategories().subscribe(res => {
-      this.categories = res['categories'];
-      this.selectCategory(this.categories[0]);
+      this.categories = constructAll(res['categories'], TaskCategory);
+      const categoryID = this.storageService.get('categoryID') || this.categories[0].id;
+      this.selectCategory(categoryID);
     }, err => {
       this.error = err;
     });
   }
 
-  selectCategory(category) {
-    this.selectedCategoryID = category.id;
-    this.taskService.getTasksForCategory(category.id).subscribe((res) => {
-      this.allTasks = constructAll(res['tasks'], Task);
-      this.filterTasks();
-      this.reset();
-    }, err => {
-      this.error = err;
-    });
-  }
-
-  filterTasks() {
-    this.filteredTasks = this.allTasks.filter((item) => {
-      if (this.showImportant) {
-        return item.completed === this.showCompleted && item.important === true;
-      } else {
-        return item.completed === this.showCompleted;
-      }
-    });
+  selectCategory(category_id) {
+    this.selectedCategoryID = category_id;
+    this.storageService.set('categoryID', this.selectedCategoryID);
+    this.getTasks();
   }
 
   toggleImportant() {
     this.showImportant = !this.showImportant;
+    this.storageService.set('showImportant', this.showImportant);
     this.filterTasks();
   }
 
@@ -85,6 +74,26 @@ export class TaskListsComponent implements OnInit {
   }
 
   // Actions on Tasks
+  getTasks() {
+    this.taskService.getTasksForCategory(this.selectedCategoryID).subscribe((res) => {
+      this.allTasks = constructAll(res['tasks'], Task);
+      this.filterTasks();
+      this.reset();
+    }, err => {
+      this.error = err;
+    });
+  }
+
+  filterTasks() {
+    this.filteredTasks = this.allTasks.filter((item) => {
+      if (this.showImportant) {
+        return item.completed === this.showCompleted && item.important === true;
+      } else {
+        return item.completed === this.showCompleted;
+      }
+    });
+  }
+
   refreshTask() {
     this.task = new Task({});
   }
