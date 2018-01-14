@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  baseURL: 'http://127.0.0.1:8000/api',
+  baseURL: 'https://taskspace-backend.herokuapp.com//api',
 };
