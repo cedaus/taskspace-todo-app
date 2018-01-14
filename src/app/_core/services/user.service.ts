@@ -9,18 +9,29 @@ import {User} from '../../_core/models/user.models';
 
 @Injectable()
 export class UserService {
-  user: Observable<any>;
   userStore: User;
   private userSubject: BehaviorSubject<User> = new BehaviorSubject(null as User);
   private USER_URL = `${environment.baseURL}/users`;
   constructor(private raw: RawApiService, private auth: AuthApiService, private router: Router) {
-    this.user = this.userSubject.asObservable();
-    this.load();
+    this.load(true);
+  }
+  //
+  load(refresh?: boolean) {
+    if (this.userStore && refresh) {
+      return;
+    } else {
+      this.getUser().subscribe(res => {
+        this.userStore = res;
+        this.userSubject.next(Object.assign({}, this.userStore));
+      }, err => {
+        console.log(err);
+      });
+    }
   }
   get user$() {
     return this.userSubject.asObservable().filter((val) => val != null);
   }
-
+  //
   getUser() {
     return this.auth.get(`${this.USER_URL}/info`);
   }
@@ -32,16 +43,5 @@ export class UserService {
   }
   getPublicUser(user_id: number) {
     return this.raw.get(`${this.USER_URL}/profile/public-detail/?user_id=${user_id}`);
-  }
-  load() {
-    if (this.userStore) {
-      console.log(11);
-      return;
-    } else {
-      this.getUser().subscribe(res => {
-        this.userStore = res;
-        this.userSubject.next(Object.assign({}, this.userStore));
-      });
-    }
   }
 }

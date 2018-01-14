@@ -13,8 +13,8 @@ import {UserService} from './user.service';
 @Injectable()
 export class AuthService {
   private bSubject: BehaviorSubject<boolean> = new BehaviorSubject(false);
-  state: Observable<boolean> = this.bSubject.asObservable();
-  token: string;
+  AUTH_STATE: Observable<boolean> = this.bSubject.asObservable();
+  AUTH_TOKEN: string;
   AUTH_URL = `${environment.baseURL}/authe`;
   REDIRECT_URL: any;
   constructor (
@@ -28,7 +28,7 @@ export class AuthService {
     this.http.post(`${this.AUTH_URL}/api-token-auth/`, creds).subscribe(response => {
       if (response['token']) {
         this.storageService.set('token', response['token']);
-        this.token = response['token'];
+        this.AUTH_TOKEN = response['token'];
         this.bSubject.next(true);
         this.postLogin();
         return true;
@@ -36,7 +36,7 @@ export class AuthService {
     });
   }
   logout(): void {
-    this.token = null;
+    this.AUTH_TOKEN = null;
     this.storageService.remove('token');
     this.bSubject.next(false);
     this.postLogout();
@@ -55,12 +55,12 @@ export class AuthService {
   }
   //
   public authenticated() {
-    return tokenNotExpired('token', this.token);
+    return tokenNotExpired('token', this.AUTH_TOKEN);
   }
   //
   load() {
-    this.token = this.storageService.get('token');
-    this.bSubject.next(tokenNotExpired('token', this.token));
+    this.AUTH_TOKEN = this.storageService.get('token');
+    this.bSubject.next(tokenNotExpired('token', this.AUTH_TOKEN));
   }
   redirect() {
     if (this.REDIRECT_URL) {

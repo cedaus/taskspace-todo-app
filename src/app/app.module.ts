@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { Injector, NgModule } from '@angular/core';
+import {HTTP_INTERCEPTORS} from '@angular/common/http';
 // PROJECT
 import { AppComponent } from './app.component';
 import {TaskModule} from './task/task.module';
@@ -11,6 +12,9 @@ import {AuthService} from './_core/services/auth.service';
 import {StorageService} from './_core/services/storage.service';
 import {UserService} from './_core/services/user.service';
 import {TaskService} from './_core/services/task.service';
+import {AuthGuard} from './_core/guards/auth.guard';
+import {AuthInterceptor} from './_core/factories/auth.factory';
+import {ServiceLocator} from './_core/factories/service-location.factory';
 
 @NgModule({
   declarations: [
@@ -23,7 +27,22 @@ import {TaskService} from './_core/services/task.service';
     TaskModule,
     AppRoutingModule
   ],
-  providers: [AuthApiService, RawApiService, AuthService, StorageService, UserService, TaskService],
+  providers: [
+    // Authentication
+    AuthService, AuthGuard, AuthApiService,
+    // Others
+    RawApiService, StorageService, UserService, TaskService,
+    // Interceptor
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true,
+    }
+  ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+  constructor(private injector: Injector) {
+    ServiceLocator.injector = this.injector;
+  }
+}
