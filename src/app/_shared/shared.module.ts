@@ -6,15 +6,19 @@ import {HttpClientModule} from '@angular/common/http';
 import {HttpModule} from '@angular/http';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {RouterModule} from '@angular/router';
+import {LoginComponent} from './login/login.component';
 // PROJECT
 
 @NgModule({
   imports:      [CommonModule, HttpClientModule, HttpModule, FormsModule, BrowserAnimationsModule, RouterModule],
-  declarations: [],
+  declarations: [
+    LoginComponent
+  ],
   exports:      [
     // Modules
     CommonModule, HttpClientModule, HttpModule, FormsModule, RouterModule,
     // Components
+    LoginComponent
   ]
 })
 export class SharedModule { }

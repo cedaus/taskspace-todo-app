@@ -1,0 +1,58 @@
+<div class="main-section col-12">
+  <div class="control-nav">
+    <button (click)="onLogout()" class="standard blue mt5 mlr10 float-right">Logout</button>
+  </div>
+  <div *ngIf="user" class="parent-section scroll">
+    <div class="row">
+      <div class="row child-section center mt50">
+        <div class="card">
+          <div class="card-avatar">
+            <img class="img" src="{{user.image}}" onerror="this.src='../assets/img/default-dp.png';">
+          </div>
+          <div *ngIf="edit == false" class="card-content align-center">
+            <h6 class="card-text mt10">@{{user.username}}</h6>
+            <h4 class="card-title mt10">{{user.name}}</h4>
+            <p class="card-description mt5">{{user.summary}}</p>
+            <div class="mt10">
+              <button (click)="editProfile()" class="standard blue mt20 mb20">Edit Profile</button>
+            </div>
+          </div>
+          <div *ngIf="edit == true" class="card-content">
+            <h4 class="card-title align-center">Your Personl Details</h4>
+            <div class="mt20 align-center">
+              <h6 class="card-text">Link to your profile photo:</h6>
+              <input [(ngModel)]='user.image' type="text" placeholder="Profile Photo Link" class="input-box mt5">
+            </div>
+            <div class="col-6 form-group is-empty">
+              <input [(ngModel)]='user.first_name' type="text" placeholder="First Name" class="input-form">
+              <span class="material-input"></span>
+            </div>
+            <div class="col-6 form-group is-empty">
+              <input [(ngModel)]='user.last_name' type="text" placeholder="Last Name" class="input-form">
+              <span class="material-input"></span>
+            </div>
+            <div class="col-12 form-group is-empty">
+              <input [(ngModel)]='user.heading' type="text" placeholder="Heading" class="input-form">
+              <span class="material-input"></span>
+            </div>
+            <div class="col-12 form-group is-empty">
+              <input [(ngModel)]='user.email' type="text" placeholder="Email" class="input-form">
+              <span class="material-input"></span>
+            </div>
+            <div class="col-12 form-group is-empty">
+              <input [(ngModel)]='user.link' type="text" placeholder="Please input a social connect link" class="input-form">
+              <span class="material-input"></span>
+            </div>
+            <div class="col-12 form-group is-empty">
+              <textarea [(ngModel)]='user.summary' maxlength="150" rows="4" type="text" placeholder="Describe yourself in 150 Characters" class="input-form"></textarea>
+              <span class="material-input"></span>
+            </div>
+            <div class="mt20 mb20 align-center">
+              <button (click)="updateProfile()" class="standard blue">Update Profile</button>
+            </div>
+      </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

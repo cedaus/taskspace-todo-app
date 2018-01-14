@@ -1,3 +1,12 @@
+//* --------Generic Button------- *//
+.gen-btn {
+  padding: 11px 20px 15px 20px;
+  border-radius: 100px;
+  font-size: 15px;
+  cursor: pointer;
+  background: #FFFFFF;
+}
+
 //* --------Text Arrow Button------- *//
 .text-arrow-btn {
   position: relative;
@@ -20,7 +29,7 @@
   }
 }
 
-
+//* --------Switch Button------- *//
 .switch {
   position: relative;
   width:55px;

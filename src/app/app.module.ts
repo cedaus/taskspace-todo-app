@@ -15,6 +15,7 @@ import {TaskService} from './_core/services/task.service';
 import {AuthGuard} from './_core/guards/auth.guard';
 import {AuthInterceptor} from './_core/factories/auth.factory';
 import {ServiceLocator} from './_core/factories/service-location.factory';
+import {UserModule} from './user/user.module';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import {ServiceLocator} from './_core/factories/service-location.factory';
     SharedModule,
     ContentModule,
     TaskModule,
+    UserModule,
     AppRoutingModule
   ],
   providers: [

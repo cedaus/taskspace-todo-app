@@ -22,7 +22,7 @@ export class TaskService {
     return this.auth.post(`${this.TASK_URL}/category/${category_id}/`, JSON.stringify(context));
   }
   getTasksForCategory(category_id) {
-    return this.raw.get(`${this.TASK_URL}/category-tasks/?category_id=${category_id}`);
+    return this.auth.get(`${this.TASK_URL}/category-tasks/?category_id=${category_id}`);
   }
   createTask(context) {
     return this.auth.post(`${this.TASK_URL}/task/new/`, JSON.stringify(context));

@@ -3,13 +3,14 @@ import { RouterModule, Routes } from '@angular/router';
 // PROJECT
 import {TaskCategoriesComponent} from './task-categories/task-categories.component';
 import {TaskListsComponent} from './task-lists/task-lists.component';
+import {AuthGuard} from '../_core/guards/auth.guard';
 
 const routes: Routes = [
   {
     path: 'tasks',
     children: [
-      { path: 'categories', component: TaskCategoriesComponent},
-      { path: 'list', component: TaskListsComponent},
+      { path: 'categories', component: TaskCategoriesComponent, canActivate: [AuthGuard]},
+      { path: 'list', component: TaskListsComponent, canActivate: [AuthGuard]},
     ]
   },
 ];

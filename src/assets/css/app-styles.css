@@ -199,4 +199,14 @@ SOCIAL
   background-color: #fafbfc;
 }
 
-/*===================error========================*/
+/*===================AUTH========================*/
+.auth {
+  margin: 0px auto;
+  width: 25%;
+}
+.auth button {
+  width: 100%;
+}
+.auth input {
+  width: 100%;
+}
