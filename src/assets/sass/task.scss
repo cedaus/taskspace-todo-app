@@ -399,6 +399,9 @@ li:hover .delete-btn {
   font-size: 15px;
   color: #FFFFFF;
   opacity: 0.5;
+  &.active {
+    opacity: 1;
+  }
 }
 
 .task-important-label {
@@ -408,4 +411,7 @@ li:hover .delete-btn {
   font-size: 15px;
   color: #FFFFFF;
   opacity: 0.5;
+  &.active {
+    opacity: 1;
+  }
 }

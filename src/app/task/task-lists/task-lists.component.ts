@@ -13,7 +13,7 @@ import {StorageService} from '../../_core/services/storage.service';
 
 export class TaskListsComponent implements OnInit {
   categories = [];
-  selectedCategoryID: null;
+  selectedCategoryID = 1;
   // Task
   allTasks: Task[] = [];
   filteredTasks: Task[] = [];
@@ -41,8 +41,9 @@ export class TaskListsComponent implements OnInit {
   }
 
   selectCategory(category_id) {
-    this.selectedCategoryID = category_id;
+    this.selectedCategoryID = Number(category_id);
     this.storageService.set('categoryID', this.selectedCategoryID);
+    this.showCompleted = false;
     this.getTasks();
   }
 
@@ -53,11 +54,6 @@ export class TaskListsComponent implements OnInit {
   }
 
   // Button Triggers
-  reset() {
-    this.error = null;
-    this.showCompleted = false;
-    this.showTaskInfo = false;
-  }
   add() {
     this.error = null;
     this.refreshTask();
@@ -68,7 +64,7 @@ export class TaskListsComponent implements OnInit {
     this.showTaskInfo = false;
   }
   edit(task) {
-    this.task = task;
+    this.task = Object.assign({}, task);
     this.error = null;
     this.showTaskInfo = true;
   }
@@ -78,7 +74,6 @@ export class TaskListsComponent implements OnInit {
     this.taskService.getTasksForCategory(this.selectedCategoryID).subscribe((res) => {
       this.allTasks = constructAll(res['tasks'], Task);
       this.filterTasks();
-      this.reset();
     }, err => {
       this.error = err;
     });

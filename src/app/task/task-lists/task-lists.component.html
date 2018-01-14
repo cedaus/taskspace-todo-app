@@ -7,11 +7,11 @@
           <div class="switch-circle">
           </div>
         </div>
-        <span *ngIf="showImportant" Class="important-label">Showing only Important Tasks</span>
+        <span *ngIf="showImportant" Class="important-label active">Showing only Important Tasks</span>
         <span *ngIf="!showImportant" Class="important-label">Showing all Tasks</span>
       </div>
       <div class="mt10">
-        <button *ngFor="let category of categories" (click)="selectCategory(category.id)" class="category-btn">{{category.name}}</button>
+        <button *ngFor="let category of categories" (click)="selectCategory(category.id)" [ngClass]="{'active': selectedCategoryID === category.id}" class="category-btn">{{category.name}}</button>
       </div>
       <div [routerLink]="['/tasks/categories']" class="text-arrow-btn mt20">
         <span>Manage Categories</span>
@@ -26,11 +26,11 @@
         <!-- Card Header -->
         <div class="dyno-card-1__header">
           <ul class="nav-tabs">
-            <li class="active" (click)="showCompleted=false; filterTasks()">PENDING</li>
-            <li (click)="showCompleted=true; filterTasks()">COMPLETED</li>
+            <li [ngClass]="{'active': !showCompleted}" (click)="showCompleted=false; filterTasks()">PENDING</li>
+            <li [ngClass]="{'active': showCompleted}" (click)="showCompleted=true; filterTasks()">COMPLETED</li>
           </ul>
           <button class="add-btn" type="button" (click)="add()">
-            <svg enable-background="new 0 0 100 100" id="Layer_1" version="1.1" viewBox="0 0 100 100" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><polygon fill="#010101" points="77.6,21.1 49.6,49.2 21.5,21.1 19.6,23 47.6,51.1 19.6,79.2 21.5,81.1 49.6,53 77.6,81.1 79.6,79.2   51.5,51.1 79.6,23 "/></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" enable-background="new 0 0 100 100" id="Layer_1" version="1.1" viewBox="0 0 100 100" xml:space="preserve"><polygon fill="#010101" points="80.2,51.6 51.4,51.6 51.4,22.6 48.9,22.6 48.9,51.6 19.9,51.6 19.9,54.1 48.9,54.1 48.9,83.1   51.4,83.1 51.4,54.1 80.4,54.1 80.4,51.6 "/></svg>
           </button>
         </div>
         <!-- Card Content -->
@@ -85,7 +85,7 @@
                 <div class="switch-circle">
                 </div>
               </div>
-              <span *ngIf="task.important" class="task-important-label">Task has been set important</span>
+              <span *ngIf="task.important" class="task-important-label active">Task has been set important</span>
               <span *ngIf="!task.important" class="task-important-label">Task is not set important</span>
             </div>
           </div>

@@ -1,12 +1,13 @@
-import {Component, Input} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {AuthService} from '../../_core/services/auth.service';
+import {Router} from '@angular/router';
 
 @Component({
     selector: 'app-login',
     templateUrl: './login.component.html'
 })
 
-export class LoginComponent {
+export class LoginComponent implements OnInit {
   username: string;
   email: any;
   first_name: any;
@@ -15,11 +16,17 @@ export class LoginComponent {
   password1: any;
   password2: any;
 
-  constructor(private authService: AuthService) { }
+  constructor(private router: Router, private authService: AuthService) { }
+
+  ngOnInit() {
+    this.authService.AUTH_STATE.subscribe(val => {
+      if (val) { this.router.navigate(['/tasks/list']); }
+    });
+  }
 
   onLogin(): void {
     const creds = {username: this.username, password: this.password};
-    this.authService.REDIRECT_URL = ['/chat'];
+    this.authService.REDIRECT_URL = ['/tasks/list'];
     this.authService.login(creds);
   }
 
