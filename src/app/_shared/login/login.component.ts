@@ -10,11 +10,11 @@ import {Router} from '@angular/router';
 export class LoginComponent implements OnInit {
   username: string;
   email: any;
-  first_name: any;
-  last_name: any;
+  firstName: any;
+  lastName: any = '';
   password: string;
-  password1: any;
-  password2: any;
+  passwordRepeat: any;
+  register: boolean = false;
 
   constructor(private router: Router, private authService: AuthService) { }
 
@@ -22,6 +22,13 @@ export class LoginComponent implements OnInit {
     this.authService.AUTH_STATE.subscribe(val => {
       if (val) { this.router.navigate(['/tasks/list']); }
     });
+  }
+  toggleRegister(bool: boolean) {
+   if (bool) {
+     this.register = true;
+   } else {
+     this.register = false;
+   }
   }
 
   onLogin(): void {
@@ -31,9 +38,9 @@ export class LoginComponent implements OnInit {
   }
 
   onSignup() {
-    const context = {username: this.username, email: this.email,
-      first_name: this.first_name, last_name: this.last_name, password1: this.password1,
-      password2: this.password2};
+    const context = {username: this.email, email: this.email,
+      first_name: this.firstName, last_name: this.lastName, password1: this.password,
+      password2: this.passwordRepeat};
     this.authService.signup(context);
   }
 }

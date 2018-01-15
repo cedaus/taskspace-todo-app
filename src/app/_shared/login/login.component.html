@@ -1,11 +1,36 @@
-<div class="content">
-  <section class="auth pt50">
+<div class="content auth">
+  <header class="auth__header">
+    <div *ngIf="register">
+      <h3 class="title">Create your Free Account</h3>
+      <p class="description mt10">start organizing your task space</p>
+    </div>
+    <div *ngIf="!register">
+      <h3 class="title">Gateway to Your Account</h3>
+      <p class="description mt10">start organizing your task space</p>
+    </div>
+  </header>
+  <section *ngIf="!register" class="auth__content pt50">
     <div class="error"></div>
     <div class="gen-form">
       <input [(ngModel)]='username' type="text" placeholder="Username" class="top">
       <input [(ngModel)]='password' type="password" placeholder="Password" class="bottom">
     </div>
     <button class="gen-btn mt30" (click)="onLogin()">Login</button>
-    <div></div>
+    <div class="mt30">
+      <h6 class="prompt" (click)="toggleRegister(true)">Don't have an account? <span>Signup</span></h6>
+    </div>
+  </section>
+  <section *ngIf="register" class="auth__content pt50">
+    <div class="error"></div>
+    <div class="gen-form">
+      <input [(ngModel)]='firstName' type="text" placeholder="Name" class="top">
+      <input [(ngModel)]='email' type="text" placeholder="Email">
+      <input [(ngModel)]='password' type="password" placeholder="Password" class="bottom">
+      <input [(ngModel)]='passwordRepeat' type="password" placeholder="Repeat Password">
+    </div>
+    <button class="gen-btn mt30" (click)="onSignup()">Signup For Free</button>
+    <div class="mt30">
+      <h6 class="prompt" (click)="toggleRegister(false)">Already have an account? <span>Login</span></h6>
+    </div>
   </section>
 </div>

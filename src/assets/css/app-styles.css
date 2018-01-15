@@ -198,15 +198,3 @@ SOCIAL
   color: #2e3192;
   background-color: #fafbfc;
 }
-
-/*===================AUTH========================*/
-.auth {
-  margin: 0px auto;
-  width: 25%;
-}
-.auth button {
-  width: 100%;
-}
-.auth input {
-  width: 100%;
-}
