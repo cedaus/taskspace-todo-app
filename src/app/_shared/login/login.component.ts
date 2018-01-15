@@ -15,6 +15,8 @@ export class LoginComponent implements OnInit {
   password: string;
   passwordRepeat: any;
   register: boolean = false;
+  //
+  error = null;
 
   constructor(private router: Router, private authService: AuthService) { }
 
@@ -24,6 +26,7 @@ export class LoginComponent implements OnInit {
     });
   }
   toggleRegister(bool: boolean) {
+    this.error = null;
    if (bool) {
      this.register = true;
    } else {
@@ -32,15 +35,41 @@ export class LoginComponent implements OnInit {
   }
 
   onLogin(): void {
-    const creds = {username: this.username, password: this.password};
-    this.authService.REDIRECT_URL = ['/tasks/list'];
-    this.authService.login(creds);
+    this.error = null;
+    if (this.validate()) {
+      const creds = {username: this.email, password: this.password};
+      this.authService.REDIRECT_URL = ['/tasks/list'];
+      this.authService.login(creds);
+    }
   }
 
   onSignup() {
-    const context = {username: this.email, email: this.email,
+    this.error = null;
+    if (this.validate()) {
+      const context = {username: this.email, email: this.email,
       first_name: this.firstName, last_name: this.lastName, password1: this.password,
       password2: this.passwordRepeat};
-    this.authService.signup(context);
+      this.authService.signup(context);
+    }
+  }
+
+  validate() {
+    if (!this.email) {
+      this.error = 'Please fill your email';
+      return false;
+    } else if (!this.password) {
+      this.error = 'Please fill password';
+      return false;
+    } else if (this.register && !this.firstName) {
+      this.error = 'Please fill your name';
+      return false;
+    } else if (this.register && !this.passwordRepeat) {
+      this.error = 'Please repeat your password';
+      return false;
+    } else if (this.register && (this.password !== this.passwordRepeat)) {
+      this.error = 'Please ensure both passwords are same';
+      return false;
+    }
+    return true;
   }
 }
