@@ -77,6 +77,8 @@ export class AuthService {
     this.redirect();
   }
   postLogout() {
+    this.storageService.remove('categoryID');
+    this.storageService.remove('showImportant');
     this.redirect();
   }
 }
