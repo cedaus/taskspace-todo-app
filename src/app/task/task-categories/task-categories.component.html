@@ -1,4 +1,4 @@
-<div class="content">
+<div *ngIf="!loading" class="content">
   <div class="row">
     <div class="col-7">
       <h4 class="big-heading">Manage your task categories here</h4>
@@ -59,3 +59,5 @@
     </div>
   </div>
 </div>
+
+<app-loader-page *ngIf="loading"></app-loader-page>

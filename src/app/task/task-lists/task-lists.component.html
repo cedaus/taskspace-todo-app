@@ -1,4 +1,4 @@
-<div class="content">
+<div *ngIf="!loading" class="content">
   <div class="row">
     <div class="col-7">
       <h4 class="big-heading">Your TaskSpace</h4>
@@ -101,3 +101,5 @@
     </div>
   </div>
 </div>
+
+<app-loader-page *ngIf="loading"></app-loader-page>

@@ -15,15 +15,19 @@ export class TaskCategoriesComponent implements OnInit {
   categories: TaskCategory[] = [];
   category: TaskCategory = new TaskCategory({});
   showCategoryInfo: boolean = false;
+  // Errors, Modals, Loaders
   error = null;
+  loading: boolean = true;
 
   constructor(private taskService: TaskService) {
   }
 
   ngOnInit(): void {
     this.taskService.getCategories().subscribe(res => {
+      this.loading = false;
       this.categories = constructAll(res['categories'], TaskCategory);
     }, err => {
+      this.loading = false;
       this.error = err;
     });
   }

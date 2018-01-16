@@ -25,6 +25,7 @@ export class TaskListsComponent implements OnInit {
 
   // Errors, Modals, Loaders
   error = null;
+  loading: boolean = true;
 
   constructor(private taskService: TaskService, private storageService: StorageService) {
   }
@@ -32,10 +33,12 @@ export class TaskListsComponent implements OnInit {
   ngOnInit(): void {
     this.showImportant = bool(this.storageService.get('showImportant'));
     this.taskService.getCategories().subscribe(res => {
+      this.loading = false;
       this.categories = constructAll(res['categories'], TaskCategory);
       const categoryID = this.storageService.get('categoryID') || this.categories[0].id;
       this.selectCategory(categoryID);
     }, err => {
+      this.loading = false;
       this.error = err;
     });
   }

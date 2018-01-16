@@ -1,9 +1,18 @@
+.overbg {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 1050;
+  @include transition-all(0.1s);
+}
 .generic-loader-container{
 	@include flexbox-center();
 	height: 90%;
 }
 #circleG {
-  width:85px;
+  width:100px;
   margin:auto;
 }
 .circleG {
