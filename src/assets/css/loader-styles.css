@@ -10,10 +10,11 @@
 .generic-loader-container{
 	@include flexbox-center();
 	height: 90%;
+  text-align: center;
 }
 #circleG {
   width:100px;
-  margin:auto;
+  margin:0px auto;
 }
 .circleG {
   background-color:rgba(7,71,166, 0.2);
@@ -120,3 +121,5 @@
     -webkit-animation-duration: 0.35s;
     animation-duration: 0.35s;
 }
+
+/* -------- */

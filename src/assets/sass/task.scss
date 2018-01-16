@@ -122,7 +122,7 @@ input[type="checkbox"] {
   margin: auto;
   box-shadow: 0 0 1em hsla(0, 0%, 0%, 0.55);
   padding: em(30) em(30) em(30);
-  background: color(light);
+  background: $color-white-dark;
   border-radius: $border-radius;
 	@media only screen and (min-device-width:480px) {
 		max-width: em(550);
@@ -244,6 +244,19 @@ input[type="checkbox"] {
     color: $color-white-darker;
     font-weight: bold;
   }
+}
+
+.task-loader {
+  top: 41%;
+  left: 41%;
+}
+
+.task-bg-white {
+  background: $color-white-dark;
+}
+
+.task-bg-blue {
+  background: color(primary);
 }
 
 .category-list {

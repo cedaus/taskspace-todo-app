@@ -9,19 +9,20 @@ import {RouterModule} from '@angular/router';
 // PROJECT
 import {LoginComponent} from './login/login.component';
 import {LoaderPageComponent} from './loader-page/loader-page.component';
+import {LoaderCardComponent} from './loader-card/loader-card.component';
 
 @NgModule({
   imports:      [CommonModule, HttpClientModule, HttpModule, FormsModule, BrowserAnimationsModule, RouterModule],
   declarations: [
     LoginComponent,
     // Loaders
-    LoaderPageComponent
+    LoaderPageComponent, LoaderCardComponent
   ],
   exports:      [
     // Modules
     CommonModule, HttpClientModule, HttpModule, FormsModule, RouterModule,
     // Components
-    LoginComponent,
+    LoginComponent, LoaderCardComponent,
     // Loaders
     LoaderPageComponent
   ]

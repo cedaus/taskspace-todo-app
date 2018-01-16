@@ -22,7 +22,7 @@
     </div>
     <div class="col-5">
       <!-- Task List -->
-      <div *ngIf="!showTaskInfo" class="dyno-card-1">
+      <div *ngIf="!showTaskLoader && !showTaskInfo" class="dyno-card-1">
         <!-- Card Header -->
         <div class="dyno-card-1__header">
           <ul class="nav-tabs">
@@ -58,7 +58,7 @@
         </div>
       </div>
       <!-- Task Info -->
-      <div *ngIf="showTaskInfo" class="dyno-card-2">
+      <div *ngIf="!showTaskLoader && showTaskInfo" class="dyno-card-2">
         <!-- Card Header -->
         <div class="dyno-card-2__header">
           <div *ngIf="error" class="task-error">
@@ -98,7 +98,11 @@
           </div>
         </div>
       </div>
-    </div>
+      <!-- -->
+      <div class="dyno-card-1" *ngIf="showTaskLoader" [ngClass]="{'task-bg-blue': showTaskInfo, 'task-bg-white': !showTaskInfo}">
+        <app-loader-card *ngIf="!showTaskInfo" [color]="'#3E68B0'"></app-loader-card>
+        <app-loader-card *ngIf="showTaskInfo" [color]="'#FFFFFF'"></app-loader-card>
+      </div>
   </div>
 </div>
 

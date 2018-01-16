@@ -21,7 +21,9 @@ export class TaskListsComponent implements OnInit {
   // Toggles
   showCompleted = false;
   showImportant = false;
+  taskState: string;
   showTaskInfo: boolean = false;
+  showTaskLoader: boolean = true;
 
   // Errors, Modals, Loaders
   error = null;
@@ -56,6 +58,22 @@ export class TaskListsComponent implements OnInit {
     this.filterTasks();
   }
 
+  toggleTaskState(state) {
+    if (state === 'task-list') {
+      this.showTaskInfo = false;
+      this.showTaskLoader = false;
+    } else if (state === 'task-list-loading') {
+      this.showTaskInfo = false;
+      this.showTaskLoader = true;
+    } else if (state === 'task-info') {
+      this.showTaskInfo = true;
+      this.showTaskLoader = false;
+    } else if (state === 'task-info-loading') {
+      this.showTaskInfo = true;
+      this.showTaskLoader = true;
+    }
+  }
+
   // Button Triggers
   add() {
     this.error = null;
@@ -74,11 +92,14 @@ export class TaskListsComponent implements OnInit {
 
   // Actions on Tasks
   getTasks() {
+    this.toggleTaskState('task-list-loading');
     this.taskService.getTasksForCategory(this.selectedCategoryID).subscribe((res) => {
       this.allTasks = constructAll(res['tasks'], Task);
       this.filterTasks();
+      this.toggleTaskState('task-list');
     }, err => {
       this.error = err;
+      this.toggleTaskState('task-list');
     });
   }
 
@@ -117,18 +138,22 @@ export class TaskListsComponent implements OnInit {
     this.error = null;
     this.task['categoryId'] = this.task['categoryId'] || this.selectedCategoryID;
     if (this.preSaveTask() && !this.task.id) {
+      this.toggleTaskState('task-info-loading');
       const context = new ReverseTask(this.task);
       this.taskService.createTask(context).subscribe(res => {
         this.postCreateTask(new Task(res));
       }, err => {
         this.error = err;
+        this.toggleTaskState('task-info');
       });
     } else if (this.preSaveTask() && this.task.id) {
+      this.toggleTaskState('task-info-loading');
       const context = new ReverseTask(this.task);
       this.taskService.updateTask(this.task.id, context).subscribe(res => {
         this.postUpdateTask(new Task(res));
       }, err => {
         this.error = err;
+        this.toggleTaskState('task-info');
       });
     }
   }
@@ -164,7 +189,8 @@ export class TaskListsComponent implements OnInit {
     this.allTasks.push(task);
     this.showCompleted = task.completed;
     this.filterTasks();
-    this.close();
+    this.error = null;
+    this.toggleTaskState('task-list');
   }
   postUpdateTask(task) {
     this.allTasks = this.allTasks.map((item) => {
@@ -175,7 +201,7 @@ export class TaskListsComponent implements OnInit {
       }
     });
     this.showCompleted = task.completed;
-    this.filterTasks();
-    this.close();
+    this.error = null;
+    this.toggleTaskState('task-list');
   }
 }
