@@ -193,6 +193,7 @@ export class TaskListsComponent implements OnInit {
     this.toggleTaskState('task-list');
   }
   postUpdateTask(task) {
+    this.refreshTask();
     this.allTasks = this.allTasks.map((item) => {
       if (item.id === task.id) {
         return task;
@@ -201,6 +202,7 @@ export class TaskListsComponent implements OnInit {
       }
     });
     this.showCompleted = task.completed;
+    this.filterTasks();
     this.error = null;
     this.toggleTaskState('task-list');
   }
