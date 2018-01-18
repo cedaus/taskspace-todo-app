@@ -121,5 +121,10 @@ export class TaskCategoriesComponent implements OnInit {
     this.categories = this.categories.filter(item => {
       return item.id !== this.category.id;
     });
+    if (!this.categories.length) {
+      this.ngOnInit();
+    }
+    this.close();
+    this.refreshCategory();
   }
 }
