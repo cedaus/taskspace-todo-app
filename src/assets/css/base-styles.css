@@ -129,6 +129,8 @@ body { font: 13px Helvetica, Arial; overflow: hidden}
 .pbt20{padding-top: 20px !important; padding-bottom: 20px !important}
 .pbt30{padding-top: 30px !important; padding-bottom: 30px !important}
 
+.w25p {width: 25%; !important;}
+
 
 .overflow-hidden{
 	overflow: hidden;

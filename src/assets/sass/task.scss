@@ -165,13 +165,22 @@ input[type="checkbox"] {
     height: 35px;
   }
   &__content {
-    min-height: 400px;
+    height: 400px;
+  }
+  &__footer {
+    height: 35px;
+  }
+
+  .carousel-2-dots {
+    position: absolute;
+    bottom: -7%;
+    left: 44%
   }
 }
 
 
 
-// todo app
+// TASK LIST
 .task-list {
   padding-top: 5px;
   color: color(primary);
@@ -199,6 +208,8 @@ input[type="checkbox"] {
     }
   }
 }
+
+// TASK EMPTY LIST
 .task-empty-list {
   height: 450px;
   padding-top: 180px;
@@ -215,7 +226,7 @@ input[type="checkbox"] {
   }
 }
 
-
+// TASK INFORMATION
 .task-info {
   .heading {
     color: $color-white-base;
@@ -230,9 +241,27 @@ input[type="checkbox"] {
     background: $color-blue-dark;
     color: $color-white-base;
     font-size: 18px;
+    &.disabled {
+      color: $color-white-base;
+    }
+  }
+  .warning {
+    padding-top: 110px;
+    top: 40%;
+  }
+  .warning svg {
+    position: relative;
+    left: 45%;
+  }
+  .warning p {
+    font-size: 15px;
+    text-align: center;
+    color: $color-white-darker;
+    line-height: 1.5;
   }
 }
 
+//
 .task-error {
   position: absolute;
   top: -4px;
@@ -259,6 +288,7 @@ input[type="checkbox"] {
   background: color(primary);
 }
 
+// CATEGORY LIST
 .category-list {
   padding-bottom: 5px;
   max-height: 450px;

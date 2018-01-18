@@ -21,6 +21,9 @@ export class TaskService {
   updateCategory(category_id, context) {
     return this.auth.post(`${this.TASK_URL}/category/${category_id}/`, JSON.stringify(context));
   }
+  deleteCategory(category_id) {
+    return this.auth.delete(`${this.TASK_URL}/category/${category_id}/`);
+  }
   getTasksForCategory(category_id) {
     return this.auth.get(`${this.TASK_URL}/category-tasks/?category_id=${category_id}`);
   }
