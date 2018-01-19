@@ -44,8 +44,7 @@ export class AuthService {
   signup(context) {
     this.raw.put(`${this.AUTH_URL}/email-auth/`, context).subscribe(data => {
       const creds = {username: data.username, password: data.password};
-      this.REDIRECT_URL = ['/user/profile'];
-      this.login(creds);
+      this.postSignup(creds);
     });
   }
   passwordReset(context) {
@@ -75,6 +74,10 @@ export class AuthService {
   postLogin() {
     this.userService.load();
     this.redirect();
+  }
+  postSignup(creds) {
+    this.REDIRECT_URL = ['/tasks/list'];
+    this.login(creds);
   }
   postLogout() {
     this.storageService.remove('categoryID');
